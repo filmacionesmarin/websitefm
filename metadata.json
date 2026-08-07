@@ -1,0 +1,6 @@
+{
+  "name": "Aura Studio - Fotografía Profesional",
+  "description": "Sitio web para servicio de fotografía profesional con galería interactiva de alta resolución, filtro por categorías, detalles EXIF, comparador antes/después y formulario de contacto integrado.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
