@@ -51,10 +51,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAiAssistant, onOpenBooking
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold tracking-wider text-white font-serif group-hover:text-amber-300 transition-colors">
-                AURA <span className="font-light text-amber-400">STUDIO</span>
+                FILMACIONES <span className="font-light text-amber-400">MARIN</span>
               </span>
               <span className="text-[10px] uppercase tracking-widest text-slate-400 -mt-1 font-sans">
-                Fotografía Profesional
+                Fotografía & Video • Manta
               </span>
             </div>
           </a>

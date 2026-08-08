@@ -19,11 +19,11 @@ export const Footer: React.FC = () => {
                 </div>
               </div>
               <span className="text-lg font-bold text-white font-serif tracking-wider">
-                AURA <span className="text-amber-400 font-light">STUDIO</span>
+                FILMACIONES <span className="text-amber-400 font-light">MARÍN</span>
               </span>
             </div>
             <p className="text-slate-400 font-light leading-relaxed">
-              Estudio de fotografía profesional especializado en retratos editoriales, bodas de destino, campañas comerciales y arquitectura.
+              Servicios profesionales de filmación y fotografía para bodas, eventos corporativos, producciones audiovisuales y retratos en Manta, Ecuador.
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a href="#" className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-amber-400 border border-slate-800 transition-colors">
@@ -65,21 +65,21 @@ export const Footer: React.FC = () => {
             <h4 className="text-xs font-bold font-serif text-white uppercase tracking-wider mb-4">Atención Directa</h4>
             <div className="flex items-center gap-2">
               <Mail className="w-4 h-4 text-amber-400" />
-              <span className="font-mono text-slate-200">hola@aurastudio.es</span>
+              <span className="font-mono text-slate-200">sistemasweb.ec@gmail.com</span>
             </div>
             <div className="flex items-center gap-2">
               <Phone className="w-4 h-4 text-amber-400" />
-              <span className="font-mono text-slate-200">+34 912 345 678</span>
+              <span className="font-mono text-slate-200">+593 96 977 1348</span>
             </div>
             <p className="text-[11px] text-slate-500 pt-2">
-              Calle Velázquez 42, 28001 Madrid, España.
+              Manta, Manab&iacute;, Ecuador.
             </p>
           </div>
         </div>
 
         {/* Bottom copyright & scroll button */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500">
-          <p>© {new Date().getFullYear()} AURA STUDIO. Todos los derechos reservados. Fotografías protegidas bajo propiedad intelectual.</p>
+          <p>© {new Date().getFullYear()} FILMACIONES MARÍN. Todos los derechos reservados. Manta, Ecuador.</p>
 
           <button
             onClick={scrollToTop}

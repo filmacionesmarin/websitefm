@@ -34,14 +34,14 @@ export const AboutGear: React.FC = () => {
             <div className="relative rounded-3xl overflow-hidden border border-slate-800 shadow-2xl aspect-[4/5] group">
               <img
                 src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=1000&auto=format&fit=crop"
-                alt="Fotógrafa Principal AURA STUDIO"
+                alt="Equipo de Filmaciones Marín"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
 
               <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-slate-950/80 backdrop-blur-md border border-slate-800">
-                <h4 className="text-lg font-serif font-bold text-white">Elena Rostova</h4>
-                <p className="text-xs text-amber-400 font-mono">Fundadora & Directora de Fotografía</p>
+                <h4 className="text-lg font-serif font-bold text-white">Equipo Marín</h4>
+                <p className="text-xs text-amber-400 font-mono">Dirección Creativa & Filmación • Manta, Ecuador</p>
               </div>
             </div>
 
@@ -69,7 +69,7 @@ export const AboutGear: React.FC = () => {
             </h2>
 
             <p className="text-slate-300 text-sm sm:text-base font-light leading-relaxed">
-              Con más de una década de trayectoria capturando editoriales de moda, bodas exclusivas y campañas de marca en toda Europa y Latinoamérica, mi enfoque fusiona la precisión técnica del estudio con la espontaneidad y emoción de la luz natural.
+              Con más de una década de trayectoria capturando eventos, bodas, producciones audiovisuales y campañas de marca en Manta, Manabí y todo el Ecuador, nuestro enfoque fusiona la calidad de filmación cinematográfica con la autenticidad y calidez de momentos inolvidables.
             </p>
 
             <p className="text-slate-400 text-xs sm:text-sm font-light leading-relaxed">

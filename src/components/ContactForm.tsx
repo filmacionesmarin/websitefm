@@ -26,7 +26,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialQuoteData }) =>
     phone: '',
     serviceType: 'Sesión Retrato & Marca Personal',
     eventDate: '',
-    location: 'Estudio AURA',
+    location: 'Estudio Filmaciones Marín - Manta',
     estimatedHours: 1.5,
     additionalPhotos: 0,
     addons: [],
@@ -59,9 +59,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialQuoteData }) =>
 
   const handleWhatsAppClick = () => {
     const textMsg = encodeURIComponent(
-      `Hola AURA STUDIO, me interesa agendar una sesión fotográfica.\nNombre: ${formData.fullName || 'Cliente'}\nServicio: ${formData.serviceType}\nFecha Estimada: ${formData.eventDate || 'Por definir'}\nPresupuesto Estimado: $${formData.estimatedTotal}`
+      `Hola FILMACIONES MARÍN, me interesa agendar un servicio de fotografía o filmación.\nNombre: ${formData.fullName || 'Cliente'}\nServicio: ${formData.serviceType}\nFecha Estimada: ${formData.eventDate || 'Por definir'}\nPresupuesto Estimado: $${formData.estimatedTotal}`
     );
-    window.open(`https://wa.me/34600000000?text=${textMsg}`, '_blank');
+    window.open(`https://wa.me/593969771348?text=${textMsg}`, '_blank');
   };
 
   return (
@@ -97,8 +97,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialQuoteData }) =>
                   </div>
                   <div>
                     <span className="text-[10px] uppercase font-bold text-slate-500 block">Estudio Principal</span>
-                    <span className="font-medium text-white block">Calle Velázquez 42, 28001 Madrid</span>
-                    <span className="text-[11px] text-slate-400">Atención presencial bajo reserva</span>
+                    <span className="font-medium text-white block">Manta, Manabí</span>
+                    <span className="text-[11px] text-slate-400">Atención presencial bajo reserva • Manta, Ecuador</span>
                   </div>
                 </div>
 
@@ -107,9 +107,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialQuoteData }) =>
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-500 block">Atención Telefónica</span>
-                    <span className="font-mono text-white block font-medium">+34 912 345 678 / +34 600 000 000</span>
-                    <span className="text-[11px] text-slate-400">Lun - Sáb: 09:00 - 20:00 h</span>
+                    <span className="text-[10px] uppercase font-bold text-slate-500 block">Atención Telefónica / WhatsApp</span>
+                    <span className="font-mono text-white block font-medium">+593 96 977 1348</span>
+                    <span className="text-[11px] text-slate-400">Lun - Dom: 08:30 - 02:00 h</span>
                   </div>
                 </div>
 
@@ -119,8 +119,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialQuoteData }) =>
                   </div>
                   <div>
                     <span className="text-[10px] uppercase font-bold text-slate-500 block">Correo Electrónico</span>
-                    <span className="font-mono text-amber-300 block font-medium">hola@aurastudio.es</span>
-                    <span className="text-[11px] text-slate-400">Cotizaciones corporativas e internacionales</span>
+                    <span className="font-mono text-amber-300 block font-medium">sistemasweb.ec@gmail.com</span>
+                    <span className="text-[11px] text-slate-400">Cotizaciones de eventos y producciones</span>
                   </div>
                 </div>
               </div>
@@ -141,10 +141,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialQuoteData }) =>
             <div className="p-6 rounded-3xl bg-slate-900/50 border border-slate-800 space-y-3 text-xs text-slate-300">
               <div className="flex items-center gap-2 text-amber-400 font-semibold">
                 <ShieldCheck className="w-4 h-4" />
-                <span>Compromiso AURA STUDIO</span>
+                <span>Compromiso FILMACIONES MARÍN</span>
               </div>
               <p className="text-slate-400 font-light">
-                Reserva con total tranquilidad. Tu fecha queda bloqueada formalmente con contrato digital de servicio y garantía de reprogramación por clima en exteriores.
+                Reserva con total tranquilidad. Cobertura profesional en Manta y todo el Ecuador con contrato de servicio e itinerario garantizado.
               </p>
             </div>
           </div>
@@ -277,7 +277,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialQuoteData }) =>
                       type="text"
                       value={formData.location}
                       onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                      placeholder="Ej. Estudio AURA, Finca en Girona, Exterior..."
+                      placeholder="Ej. Estudio Filmaciones Marín, Playa Murciélago, Salón de Eventos Manta..."
                       className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
                       id="input-location"
                     />

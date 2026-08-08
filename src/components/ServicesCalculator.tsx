@@ -67,7 +67,7 @@ export const ServicesCalculator: React.FC<ServicesCalculatorProps> = ({ onApplyQ
       serviceType: currentPackage.name,
       estimatedHours: hours,
       additionalPhotos: extraPhotos,
-      location: locationType === 'estudio' ? 'Estudio AURA' : locationType === 'exterior' ? 'Exterior Local' : 'Destino fuera de la ciudad',
+      location: locationType === 'estudio' ? 'Estudio Filmaciones Marín - Manta' : locationType === 'exterior' ? 'Exterior Manta' : 'Fuera de Manta / Destino',
       addons: [...selectedAddons].map((id) => SERVICE_ADDONS.find((a) => a.id === id)?.name || id),
       estimatedTotal: totalEstimate
     });
@@ -291,7 +291,7 @@ export const ServicesCalculator: React.FC<ServicesCalculatorProps> = ({ onApplyQ
                         : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-slate-700'
                     }`}
                   >
-                    Estudio AURA ($0)
+                    Estudio Marín ($0)
                   </button>
 
                   <button

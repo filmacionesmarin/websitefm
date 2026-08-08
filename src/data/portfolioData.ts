@@ -19,7 +19,7 @@ export const PORTFOLIO_PHOTOS: PhotoItem[] = [
       aperture: 'f/1.8',
       shutterSpeed: '1/250s',
       iso: 100,
-      location: 'Estudio Central, Madrid',
+      location: 'Estudio Filmaciones Marín, Manta',
       date: '12 Mayo 2025'
     },
     likes: 142,
@@ -35,7 +35,7 @@ export const PORTFOLIO_PHOTOS: PhotoItem[] = [
     rawUrl: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=60&w=1200&auto=format&fit=crop&sat=-30',
     retouchedUrl: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop',
     aspectRatio: 'landscape',
-    description: 'Momento íntimo de los novios durante la hora dorada en la costa cantábrica con viento natural.',
+    description: 'Momento íntimo de los novios durante la hora dorada en la playa con brisa natural de Manta.',
     tags: ['Boda', 'Exterior', 'Hora Dorada', 'Romántico'],
     exif: {
       camera: 'Canon EOS R5',
@@ -44,7 +44,7 @@ export const PORTFOLIO_PHOTOS: PhotoItem[] = [
       aperture: 'f/1.4',
       shutterSpeed: '1/1000s',
       iso: 100,
-      location: 'Acantilados de Llanes, Asturias',
+      location: 'Playa San Lorenzo, Manta',
       date: '28 Junio 2025'
     },
     likes: 218,

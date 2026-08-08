@@ -59,12 +59,12 @@ app.post("/api/ai-recommendation", async (req, res) => {
       });
     }
 
-    const prompt = `Actúa como un fotógrafo profesional experto y director creativo.
-Un cliente busca asesoría para su próxima sesión de fotos.
+    const prompt = `Actúa como el director creativo de "FILMACIONES MARÍN", estudio de fotografía profesional y filmación en Manta, Manabí, Ecuador.
+Un cliente busca asesoría para su próxima sesión de fotos o video.
 Tipo de evento/sesión: ${eventType || 'General'}
 Descripción de la visión del cliente: "${userVision}"
 
-Analiza su idea y devuelve una respuesta estructurada en JSON con recomendaciones detalladas en español.`;
+Analiza su idea teniendo en cuenta la estética y la luz de Manta, Ecuador, y devuelve una respuesta estructurada en JSON con recomendaciones detalladas en español.`;
 
     const response = await ai.models.generateContent({
       model: "gemini-3.6-flash",

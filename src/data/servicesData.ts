@@ -106,10 +106,10 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     id: 'test-1',
     clientName: 'Carla & Mateo',
-    roleOrEventType: 'Boda en San Sebastián',
+    roleOrEventType: 'Boda en Manta, Manabí',
     avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop',
     rating: 5,
-    comment: 'Contratar a Aura Studio para nuestra boda fue la mejor decisión. La delicadeza con la que capturaron los momentos espontáneos nos hace revivir la lágrima y la risa cada vez que vemos el álbum.',
+    comment: 'Contratar a Filmaciones Marín para nuestra boda fue la mejor decisión. La delicadeza con la que capturaron y filmaron los momentos espontáneos nos hace revivir la emoción cada vez que vemos el video y álbum.',
     photoCoverUrl: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop',
     date: 'Junio 2025'
   },

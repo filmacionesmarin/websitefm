@@ -62,14 +62,14 @@ export const Hero: React.FC<HeroProps> = ({ onExploreGallery, onOpenAiAssistant,
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-amber-500/30 text-amber-300 text-xs font-medium backdrop-blur-md mb-6 shadow-xl animate-fade-in">
           <Award className="w-4 h-4 text-amber-400" />
-          <span>Estudio Galardonado — Selección Official Sony Alpha 2025</span>
+          <span>Filmaciones Marín — Manta, Manabí, Ecuador</span>
         </div>
 
         {/* Headline */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold font-serif text-white tracking-tight leading-[1.1] mb-6">
-          Fotografía Profesional con <br className="hidden sm:inline" />
+          Fotografía & Filmación Profesional en <br className="hidden sm:inline" />
           <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100 bg-clip-text text-transparent italic font-serif">
-            Alma & Alta Resolución
+            Manta, Ecuador
           </span>
         </h1>
 

@@ -53,7 +53,7 @@ export const Testimonials: React.FC = () => {
               Testimonios & Reseñas 5 Estrellas
             </h2>
             <p className="text-slate-400 text-sm sm:text-base font-light mt-2 max-w-xl">
-              Descubre las palabras de parejas, modelos, emprendedores y marcas que han confiado sus mejores recuerdos a AURA STUDIO.
+              Descubre las palabras de parejas, modelos, emprendedores y marcas que han confiado sus mejores momentos a FILMACIONES MARÍN.
             </p>
           </div>
 
@@ -119,7 +119,7 @@ export const Testimonials: React.FC = () => {
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-slate-100">
             <h3 className="text-xl font-serif font-bold text-white mb-4">
-              Escribe tu Reseña sobre AURA STUDIO
+              Escribe tu Reseña sobre FILMACIONES MARÍN
             </h3>
 
             {submittedSuccess ? (
@@ -154,7 +154,7 @@ export const Testimonials: React.FC = () => {
                     type="text"
                     value={roleOrEventType}
                     onChange={(e) => setRoleOrEventType(e.target.value)}
-                    placeholder="Ej. Boda en Madrid / Sesión Editorial"
+                    placeholder="Ej. Boda en Manta / Filmación de Evento"
                     className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400"
                   />
                 </div>
