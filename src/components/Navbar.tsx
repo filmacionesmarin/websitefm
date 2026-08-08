@@ -28,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAiAssistant, onOpenBooking
     { name: 'Servicios & Tarifas', href: '#servicios' },
     { name: 'Sobre Mí & Equipo', href: '#sobre-mi' },
     { name: 'Reseñas', href: '#resenas' },
-    { name: 'Contacto', href: '#contacto' },
+    { name: 'Contact', href: '#contacto' },
   ];
 
   return (
