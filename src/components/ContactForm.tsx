@@ -12,8 +12,10 @@ import {
   Sparkles,
   ShieldCheck,
   User,
-  DollarSign
+  DollarSign,
+  Instagram
 } from 'lucide-react';
+import { TikTokIcon } from './Navbar';
 
 interface ContactFormProps {
   initialQuoteData?: Partial<BookingFormState>;
@@ -30,12 +32,13 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialQuoteData }) =>
     estimatedHours: 1.5,
     additionalPhotos: 0,
     addons: [],
-    estimatedTotal: 280,
+    estimatedTotal: 0,
     notes: ''
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  const [ticketInfo, setTicketInfo] = useState<{ ticketId: string; emailSent: boolean; statusMsg: string } | null>(null);
 
   // Sync when quote data is updated from calculator or AI assistant
   useEffect(() => {
@@ -47,14 +50,40 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialQuoteData }) =>
     }
   }, [initialQuoteData]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSending(true);
 
-    setTimeout(() => {
-      setIsSending(false);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+      if (response.ok && data.success) {
+        setTicketInfo({
+          ticketId: data.ticketId || `MARIN-${Math.floor(100000 + Math.random() * 900000)}`,
+          emailSent: data.emailSent || false,
+          statusMsg: data.emailStatusMessage || 'Solicitud guardada en el servidor.'
+        });
+        setSubmitted(true);
+      } else {
+        alert(data.error || 'Error al enviar la reserva.');
+      }
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      // Fallback local submission if offline
+      setTicketInfo({
+        ticketId: `MARIN-${Math.floor(100000 + Math.random() * 900000)}`,
+        emailSent: false,
+        statusMsg: 'Solicitud procesada localmente.'
+      });
       setSubmitted(true);
-    }, 1000);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const handleWhatsAppClick = () => {
@@ -135,6 +164,29 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialQuoteData }) =>
                 <MessageCircle className="w-4 h-4 fill-white text-emerald-600" />
                 <span>Chat Directo por WhatsApp</span>
               </button>
+
+              {/* Social Media Connect Buttons */}
+              <div className="flex items-center gap-2 pt-1">
+                <a
+                  href="https://www.instagram.com/filmacionesmarin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-3 px-3 bg-gradient-to-r from-purple-900/60 via-pink-900/60 to-rose-900/60 hover:from-purple-800/80 hover:to-rose-800/80 text-white font-semibold rounded-2xl text-xs flex items-center justify-center gap-2 border border-pink-500/30 transition-all cursor-pointer shadow-md"
+                >
+                  <Instagram className="w-4 h-4 text-pink-400" />
+                  <span>Instagram</span>
+                </a>
+
+                <a
+                  href="https://www.tiktok.com/@filmacionesmarin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-3 px-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-2xl text-xs flex items-center justify-center gap-2 border border-slate-700 transition-all cursor-pointer shadow-md"
+                >
+                  <TikTokIcon className="w-4 h-4 text-amber-400" />
+                  <span>TikTok</span>
+                </a>
+              </div>
             </div>
 
             {/* Reassurance Card */}
@@ -152,27 +204,57 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialQuoteData }) =>
           {/* Right Booking Form Column */}
           <div className="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
             {submitted ? (
-              <div className="py-12 text-center space-y-4 animate-fade-in">
+              <div className="py-12 text-center space-y-5 animate-fade-in">
                 <div className="w-16 h-16 rounded-3xl bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center mx-auto shadow-xl">
                   <CheckCircle className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-serif font-bold text-white">¡Solicitud de Reserva Recibida!</h3>
+                <h3 className="text-2xl font-serif font-bold text-white">¡Solicitud Registrada con Éxito!</h3>
                 <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-                  Gracias <strong className="text-amber-300">{formData.fullName}</strong>. Hemos registrado tu consulta para <strong className="text-amber-300">{formData.serviceType}</strong>. Nuestro equipo revisará la disponibilidad de la fecha e intentará contactarte en las próximas horas.
+                  Gracias <strong className="text-amber-300">{formData.fullName}</strong>. Hemos procesado tu consulta para <strong className="text-amber-300">{formData.serviceType}</strong> en nuestro servidor.
                 </p>
 
-                <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-xs text-left max-w-md mx-auto space-y-1 font-mono text-slate-300">
-                  <div><strong>Total Estimado:</strong> ${formData.estimatedTotal}</div>
-                  <div><strong>Locación:</strong> {formData.location}</div>
-                  {formData.eventDate && <div><strong>Fecha Solicitada:</strong> {formData.eventDate}</div>}
+                <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-xs text-left max-w-md mx-auto space-y-2 font-mono text-slate-300 shadow-inner">
+                  <div className="flex justify-between border-b border-slate-800/80 pb-1.5">
+                    <span className="text-slate-400">Código de Ticket:</span>
+                    <span className="text-amber-400 font-bold">{ticketInfo?.ticketId || 'MARIN-1002'}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">Cliente:</span>
+                    <span>{formData.fullName} ({formData.email})</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">Servicio:</span>
+                    <span>{formData.serviceType}</span>
+                  </div>
+                  {formData.eventDate && (
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Fecha Solicitada:</span>
+                      <span>{formData.eventDate}</span>
+                    </div>
+                  )}
+                  {ticketInfo?.statusMsg && (
+                    <div className="pt-2 border-t border-slate-800 text-[11px] text-slate-400 font-sans italic leading-tight">
+                      ℹ️ Status: {ticketInfo.statusMsg}
+                    </div>
+                  )}
                 </div>
 
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="mt-6 px-6 py-2.5 bg-slate-800 text-amber-300 border border-amber-500/30 rounded-xl text-xs font-semibold hover:bg-slate-700"
-                >
-                  Enviar Otra Consulta
-                </button>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto pt-2">
+                  <button
+                    onClick={handleWhatsAppClick}
+                    className="w-full sm:w-auto px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-emerald-600/20"
+                  >
+                    <MessageCircle className="w-4 h-4 fill-current" />
+                    <span>Confirmar Rápido por WhatsApp</span>
+                  </button>
+
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="w-full sm:w-auto px-5 py-3 bg-slate-800 text-amber-300 border border-amber-500/30 rounded-xl text-xs font-semibold hover:bg-slate-700 cursor-pointer"
+                  >
+                    Nueva Consulta
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">

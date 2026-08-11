@@ -4,13 +4,14 @@ import {
   Grid,
   LayoutGrid,
   Search,
-  SlidersHorizontal,
   Eye,
   Heart,
   Maximize2,
   Camera,
-  Sparkles,
-  Tag
+  Tag,
+  Play,
+  Film,
+  Image as ImageIcon
 } from 'lucide-react';
 
 interface GalleryProps {
@@ -22,8 +23,9 @@ interface GalleryProps {
 
 const CATEGORIES = [
   'Todas',
-  'Retrato Editorial',
+  'Video & Filmación',
   'Bodas & Parejas',
+  'Retrato Editorial',
   'Moda & Comercial',
   'Arquitectura & Espacios',
   'Naturaleza & Viajes'
@@ -36,24 +38,33 @@ export const Gallery: React.FC<GalleryProps> = ({
   likedPhotos
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('Todas');
+  const [mediaTypeFilter, setMediaTypeFilter] = useState<'all' | 'photo' | 'video'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [layoutMode, setLayoutMode] = useState<'masonry' | 'uniform'>('masonry');
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
-  // Filter photos based on category, search, and selected tag
+  // Filter items based on media type, category, search, and tag
   const filteredPhotos = useMemo(() => {
-    return photos.filter((photo) => {
-      const matchesCategory =
-        selectedCategory === 'Todas' || photo.category === selectedCategory;
-      const matchesSearch =
-        photo.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        photo.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        photo.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
-      const matchesTag = !selectedTag || photo.tags.includes(selectedTag);
+    return photos.filter((item) => {
+      const isVideo = item.mediaType === 'video';
+      const matchesMediaType =
+        mediaTypeFilter === 'all' ||
+        (mediaTypeFilter === 'video' && isVideo) ||
+        (mediaTypeFilter === 'photo' && !isVideo);
 
-      return matchesCategory && matchesSearch && matchesTag;
+      const matchesCategory =
+        selectedCategory === 'Todas' || item.category === selectedCategory;
+
+      const matchesSearch =
+        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
+
+      const matchesTag = !selectedTag || item.tags.includes(selectedTag);
+
+      return matchesMediaType && matchesCategory && matchesSearch && matchesTag;
     });
-  }, [photos, selectedCategory, searchQuery, selectedTag]);
+  }, [photos, mediaTypeFilter, selectedCategory, searchQuery, selectedTag]);
 
   // Extract all unique tags
   const allTags = useMemo(() => {
@@ -70,13 +81,13 @@ export const Gallery: React.FC<GalleryProps> = ({
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold mb-3">
               <Camera className="w-3.5 h-3.5" />
-              <span>Portafolio de Alta Resolución</span>
+              <span>Portafolio de Fotografía & Filmación</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-bold font-serif text-white tracking-tight">
-              Galería Interactivas & Obras
+              Galería & Producciones Audiovisuales
             </h2>
             <p className="text-slate-400 text-sm sm:text-base font-light mt-2 max-w-xl">
-              Explora una selección de nuestras mejores capturas. Haz clic en cualquier imagen para abrir el visor en alta resolución con datos EXIF completos.
+              Explora nuestro trabajo en fotografía en alta resolución y producciones de video cinematográfico. Haz clic en cualquier foto o video para reproducirlo o ver sus datos en detalle.
             </p>
           </div>
 
@@ -89,7 +100,7 @@ export const Gallery: React.FC<GalleryProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Buscar por tema o etiqueta..."
+                placeholder="Buscar foto o video..."
                 className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-400/80 transition-colors"
                 id="gallery-search-input"
               />
@@ -134,6 +145,51 @@ export const Gallery: React.FC<GalleryProps> = ({
           </div>
         </div>
 
+        {/* Media Type Filter Bar (Todos / Fotos / Videos) */}
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-6 p-2 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-md">
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-slate-400 font-semibold pl-2 hidden sm:inline">Tipo de Contenido:</span>
+            <button
+              onClick={() => setMediaTypeFilter('all')}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+                mediaTypeFilter === 'all'
+                  ? 'bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20 font-bold'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+              }`}
+            >
+              <span>Todos los Medios</span>
+            </button>
+
+            <button
+              onClick={() => setMediaTypeFilter('photo')}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+                mediaTypeFilter === 'photo'
+                  ? 'bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20 font-bold'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+              }`}
+            >
+              <ImageIcon className="w-3.5 h-3.5" />
+              <span>Fotografías</span>
+            </button>
+
+            <button
+              onClick={() => setMediaTypeFilter('video')}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+                mediaTypeFilter === 'video'
+                  ? 'bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20 font-bold'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+              }`}
+            >
+              <Film className="w-3.5 h-3.5 text-amber-500 fill-amber-500/20" />
+              <span>Videos & Filmaciones</span>
+            </button>
+          </div>
+
+          <div className="text-xs text-slate-500 pr-2">
+            Mostrando <span className="text-amber-400 font-mono font-bold">{filteredPhotos.length}</span> elementos
+          </div>
+        </div>
+
         {/* Category Filter Tabs */}
         <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-6 no-scrollbar border-b border-slate-800/80">
           {CATEGORIES.map((category) => (
@@ -145,7 +201,7 @@ export const Gallery: React.FC<GalleryProps> = ({
               }}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium whitespace-nowrap transition-all cursor-pointer ${
                 selectedCategory === category
-                  ? 'bg-amber-400 text-slate-950 font-bold shadow-lg shadow-amber-500/20 scale-[1.02]'
+                  ? 'bg-slate-800 text-amber-300 border border-amber-500/40 font-bold shadow-lg scale-[1.02]'
                   : 'bg-slate-900/80 text-slate-400 hover:text-slate-200 border border-slate-800 hover:border-slate-700'
               }`}
               id={`filter-cat-${category.replace(/\s+/g, '-').toLowerCase()}`}
@@ -214,11 +270,13 @@ export const Gallery: React.FC<GalleryProps> = ({
           >
             {filteredPhotos.map((photo) => {
               const isLiked = likedPhotos.has(photo.id);
+              const isVideo = photo.mediaType === 'video';
 
               return (
                 <div
                   key={photo.id}
-                  className="group relative bg-slate-900 rounded-3xl overflow-hidden border border-slate-800/80 hover:border-amber-500/50 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 break-inside-avoid"
+                  onClick={() => onOpenLightbox(photo)}
+                  className="group relative bg-slate-900 rounded-3xl overflow-hidden border border-slate-800/80 hover:border-amber-500/50 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 break-inside-avoid cursor-pointer"
                 >
                   {/* Aspect ratio control for uniform mode */}
                   <div className={layoutMode === 'uniform' ? 'aspect-[4/3] relative overflow-hidden' : 'relative overflow-hidden'}>
@@ -229,12 +287,30 @@ export const Gallery: React.FC<GalleryProps> = ({
                       loading="lazy"
                     />
 
-                    {/* Dark gradient hover overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-5" />
+                    {/* Central Play Icon Overlay for Videos */}
+                    {isVideo && (
+                      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                        <div className="w-14 h-14 rounded-full bg-slate-950/70 border border-amber-400/80 text-amber-300 backdrop-blur-md flex items-center justify-center shadow-2xl group-hover:scale-115 group-hover:bg-amber-400 group-hover:text-slate-950 transition-all duration-300">
+                          <Play className="w-6 h-6 fill-current ml-0.5" />
+                        </div>
+                      </div>
+                    )}
 
-                    {/* Category badge (Always visible) */}
-                    <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-slate-700/80 text-amber-300 text-[11px] font-semibold">
-                      {photo.category}
+                    {/* Dark gradient hover overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300 flex flex-col justify-between p-5" />
+
+                    {/* Top badges: Category & Video tag */}
+                    <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
+                      <div className="px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-slate-700/80 text-amber-300 text-[11px] font-semibold flex items-center gap-1.5">
+                        {isVideo ? <Film className="w-3 h-3 text-amber-400 fill-amber-400/20" /> : <Camera className="w-3 h-3 text-amber-400" />}
+                        <span>{photo.category}</span>
+                      </div>
+
+                      {isVideo && photo.duration && (
+                        <div className="px-2.5 py-1 rounded-full bg-amber-500/90 text-slate-950 font-mono text-[10px] font-bold shadow-md">
+                          {photo.duration}
+                        </div>
+                      )}
                     </div>
 
                     {/* Like button (Always accessible) */}
@@ -257,17 +333,17 @@ export const Gallery: React.FC<GalleryProps> = ({
                     <div className="absolute inset-0 z-10 p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                       <div className="pointer-events-auto">
                         <span className="text-[10px] text-amber-400 font-mono tracking-wider uppercase block mb-1">
-                          {photo.exif.camera} • {photo.exif.aperture}
+                          {isVideo ? `${photo.videoQuality || '4K Video'} • ${photo.exif.camera}` : `${photo.exif.camera} • ${photo.exif.aperture}`}
                         </span>
-                        <h3 className="text-lg font-serif font-bold text-white leading-tight mb-2">
-                          {photo.title}
+                        <h3 className="text-lg font-serif font-bold text-white leading-tight mb-2 flex items-center gap-2">
+                          <span>{photo.title}</span>
                         </h3>
 
                         <p className="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
                           {photo.description}
                         </p>
 
-                        <div className="flex items-center justify-between pt-3 border-t border-slate-800">
+                        <div className="flex items-center justify-between pt-3 border-t border-slate-800/80">
                           <div className="flex items-center gap-3 text-xs text-slate-400">
                             <span className="flex items-center gap-1">
                               <Eye className="w-3.5 h-3.5 text-slate-500" />
@@ -280,12 +356,15 @@ export const Gallery: React.FC<GalleryProps> = ({
                           </div>
 
                           <button
-                            onClick={() => onOpenLightbox(photo)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onOpenLightbox(photo);
+                            }}
                             className="px-3.5 py-1.5 bg-amber-400 text-slate-950 font-bold rounded-xl text-xs flex items-center gap-1.5 hover:bg-amber-300 transition-colors shadow-lg cursor-pointer"
                             id={`btn-open-photo-${photo.id}`}
                           >
-                            <Maximize2 className="w-3.5 h-3.5" />
-                            <span>Ver HD</span>
+                            {isVideo ? <Play className="w-3.5 h-3.5 fill-current" /> : <Maximize2 className="w-3.5 h-3.5" />}
+                            <span>{isVideo ? 'Reproducir' : 'Ver HD'}</span>
                           </button>
                         </div>
                       </div>

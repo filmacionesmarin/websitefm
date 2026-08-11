@@ -83,6 +83,21 @@ export const PhotoLightbox: React.FC<PhotoLightboxProps> = ({
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const getYouTubeEmbedUrl = (url: string) => {
+    if (url.includes('youtu.be/')) {
+      const videoId = url.split('youtu.be/')[1]?.split('?')[0];
+      return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+    }
+    if (url.includes('youtube.com/watch')) {
+      const urlParams = new URLSearchParams(url.split('?')[1]);
+      const videoId = urlParams.get('v');
+      return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+    }
+    return url;
+  };
+
+  const isYouTube = photo.videoUrl ? (photo.videoUrl.includes('youtu.be') || photo.videoUrl.includes('youtube.com')) : false;
+
   return (
     <div className="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-2xl flex flex-col justify-between overflow-hidden text-white animate-fade-in">
       {/* Lightbox Top Control Bar */}
@@ -199,14 +214,39 @@ export const PhotoLightbox: React.FC<PhotoLightboxProps> = ({
           <ChevronRight className="w-6 h-6" />
         </button>
 
-        {/* High Resolution Image Container */}
+        {/* High Resolution Image / Video Player Container */}
         <div className="w-full h-full flex items-center justify-center overflow-auto p-2">
-          <img
-            src={photo.url}
-            alt={photo.title}
-            className="max-h-full max-w-full object-contain rounded-xl shadow-2xl transition-transform duration-200 select-none"
-            style={{ transform: `scale(${zoomLevel})` }}
-          />
+          {photo.mediaType === 'video' ? (
+            <div className="max-h-full max-w-4xl w-full flex items-center justify-center relative aspect-video">
+              {isYouTube ? (
+                <iframe
+                  key={photo.id}
+                  src={getYouTubeEmbedUrl(photo.videoUrl || '')}
+                  title={photo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full max-h-[80vh] rounded-2xl shadow-2xl border border-slate-800 bg-black"
+                />
+              ) : (
+                <video
+                  key={photo.id}
+                  src={photo.videoUrl || photo.url}
+                  poster={photo.thumbnailUrl}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="max-h-[80vh] max-w-full rounded-2xl shadow-2xl border border-slate-800 bg-black object-contain"
+                />
+              )}
+            </div>
+          ) : (
+            <img
+              src={photo.url}
+              alt={photo.title}
+              className="max-h-full max-w-full object-contain rounded-xl shadow-2xl transition-transform duration-200 select-none"
+              style={{ transform: `scale(${zoomLevel})` }}
+            />
+          )}
         </div>
 
         {/* EXIF Drawer Panel */}
@@ -288,13 +328,20 @@ export const PhotoLightbox: React.FC<PhotoLightboxProps> = ({
           <button
             key={item.id}
             onClick={() => onSelectPhoto(item)}
-            className={`w-12 h-12 rounded-lg overflow-hidden shrink-0 border-2 transition-all cursor-pointer ${
+            className={`w-12 h-12 rounded-lg overflow-hidden shrink-0 border-2 transition-all cursor-pointer relative ${
               item.id === photo.id
                 ? 'border-amber-400 scale-105 opacity-100 shadow-lg shadow-amber-500/30'
                 : 'border-transparent opacity-50 hover:opacity-100'
             }`}
           >
             <img src={item.thumbnailUrl} alt={item.title} className="w-full h-full object-cover" />
+            {item.mediaType === 'video' && (
+              <div className="absolute inset-0 bg-slate-950/40 flex items-center justify-center text-amber-400">
+                <span className="p-0.5 rounded-full bg-amber-400 text-slate-950 font-bold text-[8px] px-1">
+                  ▶
+                </span>
+              </div>
+            )}
           </button>
         ))}
       </div>

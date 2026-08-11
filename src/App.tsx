@@ -5,8 +5,8 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Gallery } from './components/Gallery';
 import { BeforeAfterSlider } from './components/BeforeAfterSlider';
-import { ServicesCalculator } from './components/ServicesCalculator';
 import { AboutGear } from './components/AboutGear';
+import { AIFilmAnimatorSection } from './components/AIFilmAnimatorSection';
 import { Testimonials } from './components/Testimonials';
 import { ContactForm } from './components/ContactForm';
 import { PhotoLightbox } from './components/PhotoLightbox';
@@ -82,11 +82,14 @@ export default function App() {
         {/* RAW vs Retouched Before/After Comparison Slider */}
         <BeforeAfterSlider />
 
-        {/* Services & Interactive Pricing Calculator */}
-        <ServicesCalculator onApplyQuoteToForm={handleApplyQuoteToForm} />
+        {/* AI Storyboard & Cinematic Animation Simulator */}
+        <AIFilmAnimatorSection
+          onOpenBooking={handleOpenBooking}
+          onOpenAiAssistant={() => setAiAssistantOpen(true)}
+        />
 
         {/* About Photographer & Equipment Bag */}
-        <AboutGear />
+        {/*<AboutGear />*/}
 
         {/* Client Testimonials */}
         <Testimonials />

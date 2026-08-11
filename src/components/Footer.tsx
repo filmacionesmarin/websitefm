@@ -1,5 +1,6 @@
 import React from 'react';
-import { Camera, Heart, Instagram, Globe, Mail, Phone, ArrowUp } from 'lucide-react';
+import { Camera, Heart, Instagram, Mail, Phone, ArrowUp } from 'lucide-react';
+import { TikTokIcon } from './Navbar';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -25,12 +26,27 @@ export const Footer: React.FC = () => {
             <p className="text-slate-400 font-light leading-relaxed">
               Servicios profesionales de filmación y fotografía para bodas, eventos corporativos, producciones audiovisuales y retratos en Manta, Ecuador.
             </p>
-            <div className="flex items-center gap-3 pt-2">
-              <a href="#" className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-amber-400 border border-slate-800 transition-colors">
-                <Instagram className="w-4 h-4" />
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <a
+                href="https://www.instagram.com/filmacionesmarin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-rose-400 border border-slate-800 transition-colors flex items-center gap-2 text-xs font-medium"
+                title="Instagram @filmacionesmarin"
+              >
+                <Instagram className="w-4 h-4 text-rose-400" />
+                <span>Instagram</span>
               </a>
-              <a href="#" className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-amber-400 border border-slate-800 transition-colors">
-                <Globe className="w-4 h-4" />
+
+              <a
+                href="https://www.tiktok.com/@filmacionesmarin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-amber-300 border border-slate-800 transition-colors flex items-center gap-2 text-xs font-medium"
+                title="TikTok @filmacionesmarin"
+              >
+                <TikTokIcon className="w-4 h-4 text-amber-400" />
+                <span>TikTok</span>
               </a>
             </div>
           </div>
@@ -39,12 +55,11 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-xs font-bold font-serif text-white uppercase tracking-wider mb-4">Navegación</h4>
             <ul className="space-y-2.5 font-light">
-              <li><a href="#galeria" className="hover:text-amber-300 transition-colors">Galería de Alta Resolución</a></li>
+              <li><a href="#galeria" className="hover:text-amber-300 transition-colors">Galería & Producciones de Video</a></li>
               <li><a href="#comparativa" className="hover:text-amber-300 transition-colors">Antes & Después (RAW)</a></li>
-              <li><a href="#servicios" className="hover:text-amber-300 transition-colors">Servicios & Calculadora</a></li>
-              <li><a href="#sobre-mi" className="hover:text-amber-300 transition-colors">Sobre la Creadora & Equipo</a></li>
+              //<li><a href="#sobre-mi" className="hover:text-amber-300 transition-colors">Sobre el Equipo Filmaciones Marín</a></li>
               <li><a href="#resenas" className="hover:text-amber-300 transition-colors">Opiniones de Clientes</a></li>
-              <li><a href="#contacto" className="hover:text-amber-300 transition-colors">Reserva de Citas</a></li>
+              <li><a href="#contacto" className="hover:text-amber-300 transition-colors">Reserva & Cotización</a></li>
             </ul>
           </div>
 

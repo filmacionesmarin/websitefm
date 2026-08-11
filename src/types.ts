@@ -12,9 +12,13 @@ export interface ExifData {
 export interface PhotoItem {
   id: string;
   title: string;
-  category: 'Retrato Editorial' | 'Bodas & Parejas' | 'Moda & Comercial' | 'Arquitectura & Espacios' | 'Naturaleza & Viajes';
+  category: 'Retrato Editorial' | 'Bodas & Parejas' | 'Moda & Comercial' | 'Arquitectura & Espacios' | 'Naturaleza & Viajes' | 'Video & Filmación' | 'Eventos & Producciones';
+  mediaType?: 'photo' | 'video';
   url: string;
   thumbnailUrl: string;
+  videoUrl?: string;
+  duration?: string;
+  videoQuality?: string;
   rawUrl?: string; // For before/after slider comparison
   retouchedUrl?: string;
   aspectRatio: 'portrait' | 'landscape' | 'square';

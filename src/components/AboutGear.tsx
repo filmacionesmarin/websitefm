@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GEAR_ITEMS } from '../data/servicesData';
-import { Camera, Aperture, Sun, Wind, Award, CheckCircle, Shield } from 'lucide-react';
+import { Camera, Aperture, Sun, Wind, Award, CheckCircle, Shield, Instagram } from 'lucide-react';
+import { TikTokIcon } from './Navbar';
 
 export const AboutGear: React.FC = () => {
   const [activeGearCategory, setActiveGearCategory] = useState<string>('Todas');
@@ -89,6 +90,30 @@ export const AboutGear: React.FC = () => {
                 <span className="text-amber-400 font-bold block text-lg font-serif">100% 4K/61MP</span>
                 <span className="text-slate-400">Estándar de Calidad Máxima</span>
               </div>
+            </div>
+
+            {/* Social Media Links */}
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <span className="text-xs text-slate-400 font-medium">Síguenos en vivo:</span>
+              <a
+                href="https://www.instagram.com/filmacionesmarin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-rose-400 border border-slate-800 hover:border-pink-500/40 text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer shadow-sm"
+              >
+                <Instagram className="w-4 h-4" />
+                <span>Instagram @filmacionesmarin</span>
+              </a>
+
+              <a
+                href="https://www.tiktok.com/@filmacionesmarin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 border border-slate-800 hover:border-amber-500/40 text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer shadow-sm"
+              >
+                <TikTokIcon className="w-4 h-4 text-amber-400" />
+                <span>TikTok @filmacionesmarin</span>
+              </a>
             </div>
           </div>
         </div>

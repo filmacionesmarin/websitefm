@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Camera, Sparkles, ArrowRight, Award, Star, CheckCircle, ShieldCheck } from 'lucide-react';
+import { Camera, Sparkles, ArrowRight, Award, Star, CheckCircle, ShieldCheck, Instagram } from 'lucide-react';
+import { TikTokIcon } from './Navbar';
 
 interface HeroProps {
   onExploreGallery: () => void;
@@ -80,7 +81,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreGallery, onOpenAiAssistant,
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-12">
+        <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-6">
           <button
             onClick={onExploreGallery}
             id="btn-hero-gallery"
@@ -98,6 +99,30 @@ export const Hero: React.FC<HeroProps> = ({ onExploreGallery, onOpenAiAssistant,
             <Sparkles className="w-4 h-4 text-amber-400" />
             <span>Asesor de Sesión con IA</span>
           </button>
+        </div>
+
+        {/* Social Networks Badge Pill */}
+        <div className="flex items-center gap-3 mb-10 bg-slate-900/70 border border-slate-800 px-4 py-2 rounded-full backdrop-blur-md text-xs text-slate-300">
+          <span className="text-slate-400 font-medium">Síguenos en redes:</span>
+          <a
+            href="https://www.instagram.com/filmacionesmarin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-rose-400 hover:text-amber-300 font-bold transition-colors"
+          >
+            <Instagram className="w-4 h-4" />
+            <span>@filmacionesmarin</span>
+          </a>
+          <span className="text-slate-700">•</span>
+          <a
+            href="https://www.tiktok.com/@filmacionesmarin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-amber-400 hover:text-amber-300 font-bold transition-colors"
+          >
+            <TikTokIcon className="w-4 h-4" />
+            <span>TikTok</span>
+          </a>
         </div>
 
         {/* Feature Checkmarks */}

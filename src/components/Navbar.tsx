@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Camera, Menu, X, Sparkles, Phone, ChevronRight } from 'lucide-react';
+import { Camera, Menu, X, Sparkles, Phone, ChevronRight, Instagram } from 'lucide-react';
+
+export const TikTokIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 1 1-2.896-2.896c.211 0 .416.024.615.068V9.336a6.34 6.34 0 0 0-.615-.03 6.341 6.341 0 1 0 6.341 6.341V8.718a8.211 8.211 0 0 0 4.77 1.526V6.799a4.814 4.814 0 0 1-1.000-.113z"/>
+  </svg>
+);
 
 interface NavbarProps {
   onOpenAiAssistant: () => void;
@@ -23,10 +29,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAiAssistant, onOpenBooking
   }, []);
 
   const navLinks = [
-    { name: 'Galería', href: '#galeria' },
+    { name: 'Galería & Videos', href: '#galeria' },
     { name: 'Antes/Después', href: '#comparativa' },
-    { name: 'Servicios & Tarifas', href: '#servicios' },
-    { name: 'Sobre Mí & Equipo', href: '#sobre-mi' },
+    //{ name: 'Sobre Mí & Equipo', href: '#sobre-mi' },
     { name: 'Reseñas', href: '#resenas' },
     { name: 'Contacto', href: '#contacto' },
   ];
@@ -74,14 +79,36 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAiAssistant, onOpenBooking
           </nav>
 
           {/* Right Action Buttons */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2">
+            <a
+              href="https://www.instagram.com/filmacionesmarin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 text-slate-300 hover:text-amber-400 bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/40 rounded-xl transition-all cursor-pointer"
+              title="Instagram @filmacionesmarin"
+              id="link-instagram-nav"
+            >
+              <Instagram className="w-4 h-4" />
+            </a>
+
+            <a
+              href="https://www.tiktok.com/@filmacionesmarin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 text-slate-300 hover:text-amber-400 bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/40 rounded-xl transition-all cursor-pointer"
+              title="TikTok @filmacionesmarin"
+              id="link-tiktok-nav"
+            >
+              <TikTokIcon className="w-4 h-4" />
+            </a>
+
             <button
               onClick={onOpenAiAssistant}
               id="btn-ai-assistant-nav"
-              className="px-3.5 py-2 text-xs font-semibold text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-sm hover:border-amber-400"
+              className="px-3.5 py-2 text-xs font-semibold text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-sm hover:border-amber-400 ml-1"
             >
               <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
-              <span>Asesor de Sesión IA</span>
+              <span>Asesor IA</span>
             </button>
 
             <button
@@ -133,6 +160,28 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAiAssistant, onOpenBooking
             ))}
 
             <div className="pt-4 border-t border-slate-800/80 flex flex-col gap-2">
+              <div className="flex items-center gap-2 mb-2">
+                <a
+                  href="https://www.instagram.com/filmacionesmarin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-2.5 px-3 bg-slate-900 border border-slate-800 hover:border-amber-500/40 rounded-xl flex items-center justify-center gap-2 text-xs text-slate-300 font-medium"
+                >
+                  <Instagram className="w-4 h-4 text-rose-400" />
+                  <span>Instagram</span>
+                </a>
+
+                <a
+                  href="https://www.tiktok.com/@filmacionesmarin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-2.5 px-3 bg-slate-900 border border-slate-800 hover:border-amber-500/40 rounded-xl flex items-center justify-center gap-2 text-xs text-slate-300 font-medium"
+                >
+                  <TikTokIcon className="w-4 h-4 text-amber-400" />
+                  <span>TikTok</span>
+                </a>
+              </div>
+
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
